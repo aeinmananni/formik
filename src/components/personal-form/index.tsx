@@ -12,6 +12,7 @@ const PersonalForm = () => {
     },
     onSubmit: (data: PersonalType) => {
       console.log(data);
+      formik.resetForm();
     },
   });
   const className = "border w-full  rounded-lg p-1";
@@ -44,7 +45,6 @@ const PersonalForm = () => {
             onClick={(e) => {
               e.preventDefault();
               formik.handleSubmit();
-              formik.resetForm();
             }}
             text="submite"
             className="bg-blue-700 w-1/4 p-1 rounded-lg text-white"
