@@ -15,6 +15,7 @@ const PersonalForm = () => {
   });
   const className = "border w-full  rounded-lg p-1";
 
+  console.log("Formik Toched", formik.touched);
   return (
     <div className="flex justify-center items-center w-full p-5">
       <form className="rounded-lg shadow-md flex flex-col justify-center items-start w-1/2 border p-2 gap-6">
@@ -24,7 +25,12 @@ const PersonalForm = () => {
           onChange={formik.handleChange}
           className={className}
           value={formik.values.firstName}
-          errorMessage={formik.errors.firstName && formik.errors.firstName}
+          onBlur={formik.handleBlur}
+          errorMessage={
+            formik.touched.firstName && formik.errors.firstName
+              ? formik.errors.firstName
+              : ""
+          }
         />
         <Input
           lable="lastName"
@@ -32,7 +38,12 @@ const PersonalForm = () => {
           onChange={formik.handleChange}
           className={className}
           value={formik.values.lastName}
-          errorMessage={formik.errors.lastName && formik.errors.lastName}
+          errorMessage={
+            formik.touched.lastName && formik.errors.lastName
+              ? formik.errors.lastName
+              : ""
+          }
+          onBlur={formik.handleBlur}
         />
         <Input
           lable="email"
@@ -40,7 +51,12 @@ const PersonalForm = () => {
           onChange={formik.handleChange}
           className={className}
           value={formik.values.email}
-          errorMessage={formik.errors.email && formik.errors.email}
+          errorMessage={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : ""
+          }
+          onBlur={formik.handleBlur}
         />
         <div className="flex w-full justify-center items-center">
           <Button
