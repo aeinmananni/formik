@@ -1,7 +1,7 @@
-import PersonalForm from "./components/personal-form";
-
+// import PersonalForm from "./components/personal-form";
+import FormikComponents from "./components/formik-components";
 const App = () => {
-  return <PersonalForm />;
+  return <FormikComponents />;
 };
 
 export default App;
