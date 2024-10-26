@@ -3,4 +3,5 @@ export type PersonalType ={
      lastName:string,
      email:string,
      comments?:string
+     address?:string
 }

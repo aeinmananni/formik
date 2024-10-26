@@ -1,9 +1,11 @@
 import { PersonalType } from "../models";
-
+import * as Yup from "yup";
 export const initialValues: PersonalType = {
     firstName: "",
     lastName: "",
     email: "",
+    comments:"",
+    address:""
   };
   export const validate = (values: PersonalType) => {
     let errors: PersonalType | object = {};
@@ -22,3 +24,14 @@ export const initialValues: PersonalType = {
     }
     return errors;
   };
+
+
+export const validationSchema = Yup.object({
+    firstName: Yup.string().required("firstName is required !"),
+    lastName: Yup.string().required("lastName is Required !"),
+    email: Yup.string()
+      .email("Is Not Email Format Validate")
+      .required("Email is Required !"),
+    comments: Yup.string().required("comments is Required !"),
+    address: Yup.string().required("Adrres is Required !"),
+  });

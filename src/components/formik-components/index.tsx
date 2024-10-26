@@ -1,17 +1,10 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { initialValues } from "../utils";
+import { Formik, Form, Field, ErrorMessage, FieldProps } from "formik";
+import { initialValues, validationSchema } from "../utils";
 import Button from "../../UI/button";
-import * as Yup from "yup";
-import { PersonalType } from "../../models";
 
-const validationSchema = Yup.object({
-  firstName: Yup.string().required("firstName is required !"),
-  lastName: Yup.string().required("lastName is Required !"),
-  email: Yup.string()
-    .email("Is Not Email Format Validate")
-    .required("Email is Required !"),
-  comments: Yup.string().required("comments is Required !"),
-});
+import { PersonalType } from "../../models";
+import Input from "../../UI/input";
+
 const FormikComponents = () => {
   return (
     <Formik
@@ -26,37 +19,80 @@ const FormikComponents = () => {
             type="text"
             id="firstName"
             name="firstName"
+            placeholder="firstName"
             className="border !w-full"
           />
-          <ErrorMessage name="firstName" className="text-red-500" />
+          <ErrorMessage
+            name="firstName"
+            className="text-red-500"
+            component={"small"}
+          />
         </div>
         <div className="flex flex-col gap-1 w-full">
           <Field
+            placeholder="lastName"
             type="text"
             id="lastName"
             name="lastName"
             className="border !w-full"
           />
-          <ErrorMessage name="lastName" />
+          <ErrorMessage
+            className="text-red-500"
+            name="lastName"
+            component={"small"}
+          />
         </div>
         <div className="flex flex-col gap-1 w-full">
           <Field
+            placeholder="email"
             type="text"
             id="email"
             name="email"
             className="border !w-full"
           />
-          <ErrorMessage name="email" />
+          <ErrorMessage
+            className="text-red-500 text-xs"
+            name="email"
+            component={"small"}
+          />
         </div>
+
         <div className="flex flex-col gap-1 w-full">
           <Field
+            placeholder="comments"
             as={"textarea"}
             type="text"
             id="comments"
             name="comments"
             className="border !w-full"
           />
-          <ErrorMessage name="comments" />
+
+          <ErrorMessage
+            className="text-red-500"
+            name="comments"
+            component="small"
+          />
+        </div>
+
+        {/* Let's make a customized ponnet */}
+
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="address" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="address"
+                  className="border "
+                  placeholder="address"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
         </div>
         <div className="flex w-full justify-center items-center">
           <Button

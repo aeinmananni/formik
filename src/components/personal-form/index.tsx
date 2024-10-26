@@ -2,16 +2,7 @@ import Input from "../../UI/input";
 import Button from "../../UI/button";
 import { useFormik } from "formik";
 import { PersonalType } from "../../models";
-import { initialValues } from "../utils";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object({
-  firstName: Yup.string().required("firstName is required !"),
-  lastName: Yup.string().required("lastName is Required !"),
-  email: Yup.string()
-    .email("Is Not Email Format Validate")
-    .required("Email is Required !"),
-});
+import { initialValues, validationSchema } from "../utils";
 
 const PersonalForm = () => {
   const formik = useFormik<PersonalType>({
