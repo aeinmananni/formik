@@ -1,4 +1,12 @@
-import { Formik, Form, Field, ErrorMessage, FieldProps } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldProps,
+  FieldArray,
+  FieldArrayRenderProps,
+} from "formik";
 import { initialValues, validationSchema } from "../utils";
 import Button from "../../UI/button";
 
@@ -9,8 +17,10 @@ const FormikComponents = () => {
   return (
     <Formik
       className="flex justify-center items-center w-full p-5"
+      onSubmit={(values: PersonalType) => {
+        console.log(values);
+      }}
       initialValues={initialValues}
-      onSubmit={(values: PersonalType) => console.log(values)}
       validationSchema={validationSchema}
     >
       <Form className="rounded-lg shadow-md flex flex-col justify-center items-start w-full border p-2 gap-6">
@@ -94,9 +104,136 @@ const FormikComponents = () => {
             }}
           </Field>
         </div>
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="phones.home" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="phones.home"
+                  className="border "
+                  placeholder="home"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="phones.mobile" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="phones.mobile"
+                  className="border "
+                  placeholder="mobile"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="phones.office" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="phones.office"
+                  className="border "
+                  placeholder="office"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="skills[0]" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="skills1"
+                  className="border "
+                  placeholder="skills1"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <Field type="text" name="skills[1]" className="border !w-full">
+            {(props: FieldProps) => {
+              const { meta, field } = props;
+
+              return (
+                <Input
+                  type="text"
+                  id="skills2"
+                  className="border "
+                  placeholder="skills2"
+                  errorMessage={meta.touched && meta.error ? meta.error : ""}
+                  {...field}
+                />
+              );
+            }}
+          </Field>
+        </div>
+        <div className="flex flex-col gap-1 w-full">
+          <FieldArray name="corses">
+            {(props: FieldArrayRenderProps) => {
+              const { push, remove, form } = props;
+              const { values } = form;
+              const { corses } = values;
+              return (
+                <div className="flex flex-col gap-4">
+                  {corses.map((corse, index: number) => (
+                    <div key={index} className="flex  gap-4 w-full ">
+                      <Field
+                        type="text"
+                        name={`corses[${index}]`}
+                        className="border !w-full"
+                      />
+                      {index > 0 && (
+                        <Button
+                          type="button"
+                          className="bg-red-500 p-3"
+                          onClick={() => remove(index)}
+                          text="-"
+                        />
+                      )}
+
+                      <Button
+                        type="button"
+                        className="bg-green-500 p-3"
+                        onClick={() => push("")}
+                        text="+"
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
+        </div>
         <div className="flex w-full justify-center items-center">
           <Button
-            text="submite"
+            text="submit"
             type="submit"
             className="bg-blue-700 w-1/4 p-1 rounded-lg text-white"
           />

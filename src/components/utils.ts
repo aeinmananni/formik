@@ -5,7 +5,14 @@ export const initialValues: PersonalType = {
     lastName: "",
     email: "",
     comments:"",
-    address:""
+    address:"",
+    phones:{
+        home:"",
+        mobile:"",
+        office:""
+    },
+    skills:["",""],
+    corses:[""]
   };
   export const validate = (values: PersonalType) => {
     let errors: PersonalType | object = {};
@@ -34,4 +41,12 @@ export const validationSchema = Yup.object({
       .required("Email is Required !"),
     comments: Yup.string().required("comments is Required !"),
     address: Yup.string().required("Adrres is Required !"),
+    phones: Yup.object({
+      home: Yup.string().required("Home phone is required!"),
+      mobile: Yup.string().optional(), // or add validation as needed
+      office: Yup.string().optional(), // or add validation as needed
+    }),
+    skills: Yup.array()
+    .of(Yup.string().required("Skill cannot be empty"))
+    .min(1, "At least one skill is required!")
   });
