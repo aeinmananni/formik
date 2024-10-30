@@ -1,11 +1,11 @@
 import {
   Formik,
   Form,
-  Field,
   ErrorMessage,
-  FieldProps,
   FieldArray,
   FieldArrayRenderProps,
+  FastFieldProps,
+  FastField,
 } from "formik";
 import { initialValues, validationSchema } from "../utils";
 import Button from "../../UI/button";
@@ -25,7 +25,7 @@ const FormikComponents = () => {
     >
       <Form className="rounded-lg shadow-md flex flex-col justify-center items-start w-full border p-2 gap-6">
         <div className="flex flex-col gap-1 w-full">
-          <Field
+          <FastField
             type="text"
             id="firstName"
             name="firstName"
@@ -39,7 +39,7 @@ const FormikComponents = () => {
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field
+          <FastField
             placeholder="lastName"
             type="text"
             id="lastName"
@@ -53,7 +53,7 @@ const FormikComponents = () => {
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field
+          <FastField
             placeholder="email"
             type="text"
             id="email"
@@ -68,7 +68,7 @@ const FormikComponents = () => {
         </div>
 
         <div className="flex flex-col gap-1 w-full">
-          <Field
+          <FastField
             placeholder="comments"
             as={"textarea"}
             type="text"
@@ -87,8 +87,8 @@ const FormikComponents = () => {
         {/* Let's make a customized ponnet */}
 
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="address" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField type="text" name="address" className="border !w-full">
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -102,11 +102,11 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="phones.home" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField type="text" name="phones.home" className="border !w-full">
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -120,11 +120,15 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="phones.mobile" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField
+            type="text"
+            name="phones.mobile"
+            className="border !w-full"
+          >
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -138,11 +142,15 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="phones.office" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField
+            type="text"
+            name="phones.office"
+            className="border !w-full"
+          >
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -156,11 +164,11 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="skills[0]" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField type="text" name="skills[0]" className="border !w-full">
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -174,11 +182,11 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <Field type="text" name="skills[1]" className="border !w-full">
-            {(props: FieldProps) => {
+          <FastField type="text" name="skills[1]" className="border !w-full">
+            {(props: FastFieldProps) => {
               const { meta, field } = props;
 
               return (
@@ -192,7 +200,7 @@ const FormikComponents = () => {
                 />
               );
             }}
-          </Field>
+          </FastField>
         </div>
         <div className="flex flex-col gap-1 w-full">
           <FieldArray name="corses">
@@ -202,9 +210,9 @@ const FormikComponents = () => {
               const { corses } = values;
               return (
                 <div className="flex flex-col gap-4">
-                  {corses.map((corse, index: number) => (
+                  {corses.map((_corse: string, index: number) => (
                     <div key={index} className="flex  gap-4 w-full ">
-                      <Field
+                      <FastField
                         type="text"
                         name={`corses[${index}]`}
                         className="border !w-full"
