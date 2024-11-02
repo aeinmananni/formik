@@ -22,6 +22,8 @@ const FormikComponents = () => {
       }}
       initialValues={initialValues}
       validationSchema={validationSchema}
+      validateOnChange={false}
+      validateOnBlur={false}
     >
       <Form className="rounded-lg shadow-md flex flex-col justify-center items-start w-full border p-2 gap-6">
         <div className="flex flex-col gap-1 w-full">
@@ -208,6 +210,7 @@ const FormikComponents = () => {
               const { push, remove, form } = props;
               const { values } = form;
               const { corses } = values;
+              console.log("Form Errors : ", form.errors);
               return (
                 <div className="flex flex-col gap-4">
                   {corses.map((_corse: string, index: number) => (
