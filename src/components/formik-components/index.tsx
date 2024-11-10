@@ -24,8 +24,8 @@ const FormikComponents = () => {
       }}
       initialValues={initialValues}
       validationSchema={validationSchema}
-      validateOnChange={false}
-      validateOnBlur={false}
+      // validateOnChange={false}
+      // validateOnBlur={false}
     >
       {(formik) => {
         console.log(formik);
@@ -271,7 +271,7 @@ const FormikComponents = () => {
                 }}
               </FieldArray>
             </div>
-            <div className="flex w-full justify-center items-center">
+            <div className="flex flex-col w-full justify-center items-center gap-2">
               <Button
                 // disabled={!formik.isValid}
                 text="submit"
@@ -283,7 +283,39 @@ const FormikComponents = () => {
                     : "bg-blue-700 cursor-default"
                 }`}
               />
+              <Button
+                type="button"
+                onClick={() => formik.validateField("email")}
+                text="validate email"
+                className="bg-red-500 px-3 py-1 w-1/4 rounded-full text-white"
+              />
+              <Button
+                type="button"
+                onClick={() => formik.validateForm()}
+                text="validate all"
+                className="bg-green-500 px-3 py-1 w-1/4 rounded-full text-white"
+              />
+              <Button
+                type="button"
+                onClick={() => formik.setFieldTouched("email")}
+                text="Visite email"
+                className="bg-red-500 px-3 py-1 w-1/4 rounded-full text-white"
+              />
+              <Button
+                type="button"
+                onClick={() =>
+                  formik.setTouched({
+                    firstName: true,
+                    lastName: true,
+                    comments: true,
+                    address: true,
+                  })
+                }
+                text="Visite all"
+                className="bg-green-500 px-3 py-1 w-1/4 rounded-full text-white"
+              />
             </div>
+            <div className="w-10 h-10"></div>
           </Form>
         );
       }}
