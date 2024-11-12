@@ -1,5 +1,7 @@
 import { PersonalType } from "../models";
+
 import * as Yup from "yup";
+
 export const initialValues: PersonalType = {
     firstName: "",
     lastName: "",
@@ -14,6 +16,21 @@ export const initialValues: PersonalType = {
     skills:["",""],
     corses:[""]
   };
+
+ export  const savedValues : PersonalType ={
+    firstName: "aein",
+    lastName: "mananni",
+    email: "aein@gmail.com",
+    comments:"",
+    address:"babol",
+    phones:{
+        home:"33146576",
+        mobile:"0990444",
+        office:"33121265"
+    },
+    skills:["React js","Node js"],
+    corses:["eee"]
+  }
   export const validate = (values: PersonalType) => {
     let errors: PersonalType | object = {};
     if (!values.firstName) {

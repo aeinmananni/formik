@@ -7,13 +7,13 @@ import {
   FastFieldProps,
   FastField,
 } from "formik";
-import { initialValues, validationSchema } from "../utils";
+import { initialValues, validationSchema, savedValues } from "../utils";
 import Button from "../../UI/button";
-
 import { PersonalType } from "../../models";
 import Input from "../../UI/input";
-
+import { useState } from "react";
 const FormikComponents = () => {
+  const [formvalues, setFormvalues] = useState<PersonalType | null>(null);
   return (
     <Formik
       className="flex justify-center items-center w-full p-5"
@@ -22,8 +22,9 @@ const FormikComponents = () => {
         console.log(onSubmitProps);
         onSubmitProps.setSubmitting(false);
       }}
-      initialValues={initialValues}
+      initialValues={formvalues ? formvalues : initialValues}
       validationSchema={validationSchema}
+      enableReinitialize
       // validateOnChange={false}
       // validateOnBlur={false}
     >
@@ -272,6 +273,12 @@ const FormikComponents = () => {
               </FieldArray>
             </div>
             <div className="flex flex-col w-full justify-center items-center gap-2">
+              <Button
+                onClick={() => setFormvalues(savedValues)}
+                type="button"
+                text="savedInfo"
+                className="bg-purple-500 px-3 py-1 w-1/4 rounded-full text-white"
+              />
               <Button
                 // disabled={!formik.isValid}
                 text="submit"
