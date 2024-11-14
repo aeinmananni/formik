@@ -18,9 +18,9 @@ const FormikComponents = () => {
     <Formik
       className="flex justify-center items-center w-full p-5"
       onSubmit={(values: PersonalType, onSubmitProps) => {
-        console.log(values);
-        console.log(onSubmitProps);
         onSubmitProps.setSubmitting(false);
+        console.log("AAAAAAAAAAAAAAA : ", values);
+        onSubmitProps.resetForm();
       }}
       initialValues={formvalues ? formvalues : initialValues}
       validationSchema={validationSchema}
