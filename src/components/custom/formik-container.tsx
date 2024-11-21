@@ -5,10 +5,17 @@ import Button from "../../UI/button";
 import FormikControl from "./formik-control";
 
 const FormikContainer = () => {
-  const initailValues = { firstName: "", exp: "" };
+  const dropDownOptions: { label: string; value: string | number }[] = [
+    { label: "Select an options", value: "" },
+    { label: "Option 1", value: "Option1" },
+    { label: "Option 2", value: "Option2" },
+    { label: "Option 3", value: "Option3" },
+  ];
+  const initailValues = { firstName: "", exp: "", select: "" };
   const validationSchemas = Yup.object({
     firstName: Yup.string().required("Required FirstName!"),
     exp: Yup.string().required("Required Exp"),
+    select: Yup.string().required("Required Select"),
   });
 
   const onSubmite = (values: { firstName: string }) => {
@@ -37,6 +44,15 @@ const FormikContainer = () => {
             name="exp"
             label={"Description"}
             errorsName="exp"
+            className="border py-1 px-1"
+          />
+          <FormikControl
+            control="select"
+            type="text"
+            name="select"
+            label={"Select as topic"}
+            errorsName="select"
+            options={dropDownOptions}
             className="border py-1 px-1"
           />
           <Button
