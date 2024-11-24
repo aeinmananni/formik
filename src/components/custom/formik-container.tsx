@@ -11,11 +11,19 @@ const FormikContainer = () => {
     { label: "Option 2", value: "Option2" },
     { label: "Option 3", value: "Option3" },
   ];
-  const initailValues = { firstName: "", exp: "", select: "" };
+
+  const radioOptions: { label: string; value: string | number }[] = [
+    { label: "Option1", value: "ROption1" },
+    { label: "Option2", value: "ROption2" },
+    { label: "Option3", value: "ROption3" },
+    { label: "Option4", value: "ROption4" },
+  ];
+  const initailValues = { firstName: "", exp: "", select: "", radio: "" };
   const validationSchemas = Yup.object({
     firstName: Yup.string().required("Required FirstName!"),
     exp: Yup.string().required("Required Exp"),
     select: Yup.string().required("Required Select"),
+    radio: Yup.string().required("Required radio"),
   });
 
   const onSubmite = (values: { firstName: string }) => {
@@ -53,6 +61,15 @@ const FormikContainer = () => {
             label={"Select as topic"}
             errorsName="select"
             options={dropDownOptions}
+            className="border py-1 px-1"
+          />
+          <FormikControl
+            control="radio"
+            type="radio"
+            name="radio"
+            label={"radio as topic"}
+            errorsName="radio"
+            options={radioOptions}
             className="border py-1 px-1"
           />
           <Button
