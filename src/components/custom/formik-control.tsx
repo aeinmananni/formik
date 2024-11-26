@@ -7,6 +7,7 @@ import FormikInput from "./element/formik-input";
 import FormikTextArea from "./element/formik-textarea";
 import FormikSelect from "./element/formik-select";
 import FormikRadio from "./element/formik-radios";
+import FormikCheckBox from "./element/formik-checkbox";
 
 type FormikControlProps = {
   control?: "input" | "textarea" | "select" | "radio" | "checkbox";
@@ -40,6 +41,9 @@ const FormikControl = ({ control, ...props }: FormikControlProps) => {
         <FormikRadio {...(props as InputHTMLAttributes<HTMLInputElement>)} />
       );
     case "checkbox":
+      return (
+        <FormikCheckBox {...(props as InputHTMLAttributes<HTMLInputElement>)} />
+      );
     default:
       return null;
   }

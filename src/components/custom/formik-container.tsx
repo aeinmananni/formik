@@ -18,12 +18,28 @@ const FormikContainer = () => {
     { label: "Option3", value: "ROption3" },
     { label: "Option4", value: "ROption4" },
   ];
-  const initailValues = { firstName: "", exp: "", select: "", radio: "" };
+  const checkboxOptions: { label: string; value: string | number }[] = [
+    { label: "CheckOption1", value: "COption1" },
+    { label: "CheckOption2", value: "COption2" },
+    { label: "CheckOption3", value: "COption3" },
+    { label: "CheckOption4", value: "COption4" },
+  ];
+  const initailValues = {
+    firstName: "",
+    exp: "",
+    select: "",
+    radio: "",
+    checkbox: [],
+  };
   const validationSchemas = Yup.object({
     firstName: Yup.string().required("Required FirstName!"),
     exp: Yup.string().required("Required Exp"),
     select: Yup.string().required("Required Select"),
     radio: Yup.string().required("Required radio"),
+    checkbox: Yup.array()
+      .of(Yup.string())
+      .min(1, "At least one checkbox must be selected")
+      .required("Required checkbox"),
   });
 
   const onSubmite = (values: { firstName: string }) => {
@@ -70,6 +86,15 @@ const FormikContainer = () => {
             label={"radio as topic"}
             errorsName="radio"
             options={radioOptions}
+            className="border py-1 px-1"
+          />
+          <FormikControl
+            control="checkbox"
+            type="checkbox"
+            name="checkbox"
+            label={"checkbox as topic"}
+            errorsName="checkbox"
+            options={checkboxOptions}
             className="border py-1 px-1"
           />
           <Button
