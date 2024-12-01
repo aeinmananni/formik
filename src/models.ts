@@ -16,3 +16,10 @@ export type PersonalType ={
      skills:string[]
      corses:string[]
 }
+
+
+
+export type  LoginFormType = {
+       email:string,
+       password:string
+}
