@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorMessage, Field } from "formik";
 import { forwardRef, InputHTMLAttributes } from "react";
 
